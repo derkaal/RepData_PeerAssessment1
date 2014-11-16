@@ -101,6 +101,17 @@ maxSteps&lt;-stepsPerInterval$steps[which.max(stepsPerInterval$steps)]</code></p
 </div>
 <div id="imputing-missing-values" class="section level3">
 <h3>Imputing missing values</h3>
+<pre class="r"><code># Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
+sumNAs&lt;-sum(is.na(activity))
+
+# Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
+
+# the averages of the intervals calculated for the previous question do replace the missing values 
+activityMV &lt;- merge(activity, stepsPerInterval, by = &quot;interval&quot;)
+mv &lt;- is.na(activityMV$steps.x)
+activityMV$steps.x[mv] &lt;- activityMV$steps.y[mv]
+activityMV &lt;- activityMV[, c(1:3)]</code></pre>
+<p>There are 2304 missing values in the dataset.</p>
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level3">
 <h3>Are there differences in activity patterns between weekdays and weekends?</h3>
