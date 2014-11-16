@@ -7,7 +7,7 @@ output:
 
 
 ## Loading and preprocessing the data
-``` {r preprocessing,echo=TRUE }
+``` {r preprocessing,echo=TRUE,results="hide" }
 library(ggplot2)
 
 #setwd("RDokumente/RepData_PeerAssessment1")
@@ -37,7 +37,7 @@ The mean of total number of steps taken per day is `r meanSteps`; the median is 
 
 ## What is the average daily activity pattern?
 
-
+``` {r average, echo=TRUE}
 
 ## Imputing missing values
 
