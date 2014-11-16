@@ -76,10 +76,32 @@ sumNAs<-sum(is.na(activity))
 activityMV <- merge(activity, stepsPerInterval, by = "interval")
 mv <- is.na(activityMV$steps.x)
 activityMV$steps.x[mv] <- activityMV$steps.y[mv]
+
+#Create a new dataset that is equal to the original dataset but with the missing data filled in.
 activityMV <- activityMV[, c(1:3)]
+
+#Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
+stepsPerDayMV<-aggregate(steps.x~date,data=activityMV,FUN=sum)
+plot3<-ggplot(stepsPerDayMV, aes(x=steps.x))+geom_histogram(binwidth=100,fill="cornsilk",color="black")
+#set the axis labels
+plot3+xlab("steps per day")+ylab("no. of days")
+```
+
+![](PA1_template_files/figure-html/NA-1.png) 
+
+```r
+#Calculate and report the mean and median total number of steps taken per day
+meanStepsMV<-mean(stepsPerDayMV$steps.x)
+medianStepsMV<-median(stepsPerDayMV$steps.x)
+
+meanDiff<-meanStepsMV-meanSteps
+medianDiff<-medianStepsMV-medianSteps
 ```
 
 There are 2304 missing values in the dataset.
 
+The mean of total number of steps taken per day is 1.0766189\times 10^{4} (1.0766189\times 10^{4} with missing values); the median is 1.0766189\times 10^{4} (10765 with missing values).
+
+The impact of imputing missing data on the estimates of the total daily number of steps is 0 for the mean and 1.1886792 for the median.
 
 ### Are there differences in activity patterns between weekdays and weekends?
